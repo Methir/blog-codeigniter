@@ -161,6 +161,7 @@ class Blog extends CI_Controller {
 		if(!$this->session->userdata('logged') or $this->session->userdata('autoridade') < 1)
 	        redirect();
 
+	    	$this->load->model('Image_model');
 				$data['formErrors']	= null;
 					$this->form_validation->set_rules('titulo_post','Titulo','trim|required|min_length[5]');
 				$this->form_validation->set_rules('autor_post','Autor','trim|required|max_length[30]');
@@ -169,7 +170,7 @@ class Blog extends CI_Controller {
 		if($this->form_validation->run() == FALSE){
 			$data['formErrors']	= validation_errors();
 		}else{	
-			$uploadImg = $this->Blog_model->uploadFile('imagem');
+			$uploadImg = $this->Image_model->uploadPostFile('imagem');
 
 			if($uploadImg['error']){
 				$data['formErrors'] = $uploadImg['message'];

@@ -146,8 +146,9 @@ class User extends CI_Controller {
     if(!$this->session->userdata('logged'))
       redirect();
 
+      $this->load->model('Image_model');
     $data['formErrors'] = NULL;
-      $uploadImg = $this->User_model->uploadFile('imagem');
+      $uploadImg = $this->Image_model->uploadUserFile('imagem');
 
         if($uploadImg['error']){
           $data['formErrors'] = $uploadImg['message'];
